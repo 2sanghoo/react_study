@@ -1,0 +1,63 @@
+<!-- React -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <div id="root"></div>
+    <!-- JSX를 사용하기 위해서 type 입력해줘야 함 -->
+    <script type="text/babel">
+        // const rootElement = document.getElementById("root");
+        const newRootElement = ReactDOM.createRoot(document.getElementById("root"));
+        
+        function draw() {
+            const number = Math.floor(Math.random() * 9 + 1);
+            const element = <button>{number}</button>;
+
+            //ReactDOM.render 지원 종료됨
+            //기존 방식: ReactDOM.render(element, rootElement);
+
+            //Root Element 생성하는 방식 변경됨. ReactDOM.createRoot를 사용해서 생성해야 함.
+            newRootElement.render(element);
+
+            //가상 DOM을 사용하면 Reflow와 Repaint의 과정이 줄어든다!
+        }
+        
+        setInterval(draw, 1000);
+    </script>
+</body>
+</html>
+
+<!-- JS -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        const rootElement = document.getElementById("root");    
+        
+        function draw() {
+            const number = Math.floor(Math.random() * 9 + 1);
+            // javascript니까 backtick
+            const element = `<button>${number}</button>`;
+            rootElement.innerHTML = element;
+        }
+        
+        setInterval(draw, 1000);
+
+    </script>
+</body>
+</html> -->

@@ -1,0 +1,70 @@
+<!-- React, JSX -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .title {
+        color: red;
+    }
+</style>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <div id="root"></div>
+    <script type="text/babel">
+        const rootElement = document.getElementById("root");
+        const text = "Hello JSX!!";
+        const hClassName = "title";
+        const element = <h1 class={hClassName}>{text}</h1>;
+        
+        // const element = React.createElement('h1', {
+        //     children : "Hello React!!"
+        // });
+
+
+        ReactDOM.render(element, rootElement);
+    </script>
+</body>
+</html>
+
+<!-- JS -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        const rootElement = document.getElementById("root");
+        const element = document.createElement("h1");
+        element.textContent = "Hello JavaScript!!";
+
+        rootElement.appendChild(element);
+    </script>
+</body>
+</html> -->
+
+<!-- HTML -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello HTML!</h1>
+</body>
+</html> -->
+

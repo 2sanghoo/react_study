@@ -1,0 +1,81 @@
+<!-- React -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <div id="root"></div>
+    <script type="text/babel">
+        const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+
+        const buttonState = [
+            {number: "적용", color: ''},
+            // {number: 2, color: 'green'},
+        ];
+
+        const Button = ({number, color, clickFunction, inputColor}) => {
+            // 적용 버튼 클릭 시 
+            const handleClickButton = (color) => {
+                clickFunction(inputColor);
+            };
+
+            return (
+                // 리액트에서는 onClick, onChange 등 카멜케이스로 작성해야 한다.
+                <button onClick={() => handleClickButton(color)} 
+                        style={{backgroundColor: `${color}`}}
+                >
+                    {number}
+                </button>
+            );
+        };
+
+        function HomePage() {
+            const [selectedButton, setSelectedButton] = React.useState("");
+            const [color, setColor] = React.useState("");
+
+            const handleChangeInput = (e) => {
+                setColor(e.target.value);
+            };
+
+            // console을 여기에 위치시켜도 input 값이 변경될 때마다 console이 찍히는 이유는?
+            console.log("color", color);
+
+            // [color] 상태가 변하는 경우 실행됨
+            React.useEffect(() => {
+                console.log("color-useEffect", color);
+            }, [color]);
+            
+            // 여기에서는 onChange 이벤트로 함수명만 써주는데, 왜 Button 컴포넌트의 button 태그 return 부분에 명시된 onClick은 화살표 함수로 해야 하지?
+            return (
+                <React.Fragment>
+                    <input onChange={handleChangeInput}/>
+                    {buttonState.map((item, index) => {
+                        return (
+                            <Button key={index}
+                                    number={item.number} 
+                                    color={item.color} 
+                                    clickFunction={setSelectedButton}
+                                    inputColor={color}
+                            />
+                        );
+                    })}
+                    <h1>내가 선택한 버튼의 색은 {selectedButton}색입니다.</h1>
+                </React.Fragment>
+            );
+        }
+
+        const element = (
+            <HomePage />
+        );
+
+        rootElement.render(element);
+    </script>
+</body>
+</html>

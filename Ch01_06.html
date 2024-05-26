@@ -1,0 +1,69 @@
+<!-- React -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <div id="root"></div>
+    <script type="text/babel">
+        const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+
+        const buttonState = [
+            {number: 1, color: 'pink'},
+            {number: 2, color: 'green'},
+            {number: 3, color: 'blue'},
+            {number: 4, color: 'yellow'},
+            {number: 5, color: 'black'},
+            {number: 6, color: 'purple'},
+        ];
+
+        const Button = ({number, color, clickFunction}) => {
+            const handleClickButton = (color) => {
+                clickFunction(color);
+            };
+
+            return (
+                <button onClick={() => handleClickButton(color)} 
+                        style={{backgroundColor: `${color}`}}
+                >
+                    {number}
+                </button>
+            );
+        };
+
+        function HomePage() {
+            // 최상위에서만 Hook 호출 가능. 반복문, 중첩함수, 조건문 등 호출X
+            const [selectedButton, setSelectedButton] = React.useState("");
+            
+            return (
+                <React.Fragment>
+                    {buttonState.map((item, index) => {
+                        return (
+                            <Button key={index}
+                                    number={item.number} 
+                                    color={item.color} 
+                                    // 상태, 상태 업데이트 함수도 props로 넘길 수 있음
+                                    clickFunction={setSelectedButton}
+                            />
+                        );
+                    })}
+                    <h1>내가 선택한 버튼의 색은 {selectedButton}색입니다.</h1>
+                </React.Fragment>
+            );
+        }
+
+        const element = (
+            <HomePage />
+        );
+
+        rootElement.render(element);
+    </script>
+</body>
+</html>
